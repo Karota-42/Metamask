@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HIDE THE META</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- MATRIX RAIN BACKGROUND -->
+<canvas id="matrixCanvas"></canvas>
+
+<!-- ASCII INTRO OVERLAY -->
+<div id="asciiIntro">
+<pre>
+ _   _       _               _         _             
+██╗  ██╗ █████╗ ██████╗  ██████╗ ████████╗ █████╗ 
+██║ ██╔╝██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝██╔══██╗
+█████╔╝ ███████║██████╔╝██║   ██║   ██║   ███████║
+██╔═██╗ ██╔══██║██╔══██╗██║   ██║   ██║   ██╔══██║
+██║  ██╗██║  ██║██║  ██║╚██████╔╝   ██║   ██║  ██║
+╚═╝  ╚═╝╚═╝  ██║╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝
+
+TEXT → HASH  | MD5 | SHA1 | SHA256 | SHA512
+</pre>
+    <p>Press <span class="accent">ENTER</span> or <span class="accent">CLICK</span> to enter the system...</p>
+</div>
+
+<div class="container">
+
+    <h1>
+        <span class="title-main">HIDE THE META</span>
+        <span class="cursor">_</span>
+    </h1>
+
+    <p class="subtitle">
+        <span id="typingText"
+              data-text="Convert plain text into (MD5 / SHA1 / SHA256 / SHA512).">
+        </span>
+        <span class="cursor">_</span>
+    </p>
+
+    <div class="input-box">
+        <input id="textInput" type="text" placeholder="> ENTER PLAINTEXT PAYLOAD">
+        <button class="btn btn-primary" onclick="generateHash()">EXECUTE</button>
+    </div>
+
+    <div id="resultBox" class="result hidden">
+        <div class="result-header">
+            <h2>OUTPUT://HASHES</h2>
+            <div class="result-actions">
+                <button class="btn btn-small copy-btn" onclick="copyHash()">COPY</button>
+                <button class="btn btn-small download-btn" onclick="downloadJSON()">EXPORT.JSON</button>
+            </div>
+        </div>
+        <pre id="hashOutput"></pre>
+    </div>
+
+    <div class="history-header">
+        <h2>LOGS</h2>
+        <button class="btn btn-small clear-btn" onclick="clearHistory()">PURGE LOGS</button>
+    </div>
+
+    <div class="table-wrapper">
+        <table id="historyTable">
+            <thead>
+            <tr>
+                <th>TIME</th>
+                <th>PLAINTEXT</th>
+                <th>MD5</th>
+                <th>SHA1</th>
+                <th>SHA256</th>
+                <th>SHA512</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in history %}
+                <tr>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.text }}</td>
+                    <td>{{ item.hashes.MD5 }}</td>
+                    <td>{{ item.hashes.SHA1 }}</td>
+                    <td>{{ item.hashes.SHA256 }}</td>
+                    <td>{{ item.hashes.SHA512 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
