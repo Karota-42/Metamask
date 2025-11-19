@@ -156,28 +156,26 @@ function initAsciiIntro() {
         intro.classList.add("hide");
         // remove listeners so they don't keep firing
         window.removeEventListener("keydown", keyHandler);
-        intro.removeEventListener("click", clickHandler);
     };
 
     const keyHandler = (e) => {
         if (e.key === "Enter") {
-            playClick();
             closeIntro();
         }
-    };
-
-    const clickHandler = () => {
-        playClick();
-        closeIntro();
     };
 
     window.addEventListener("keydown", keyHandler);
-    intro.addEventListener("click", clickHandler);
-
-    // Auto-close after a few seconds too
-    setTimeout(() => {
-        if (!intro.classList.contains("hide")) {
-            closeIntro();
-        }
-    }, 8000);
 }
+// dot animation
+function startDotAnimation() {
+    const dot = document.getElementById("dot-anim");
+    if (!dot) return;
+
+    let count = 0;
+    setInterval(() => {
+        count = (count + 1) % 4;  
+        dot.textContent = ".".repeat(count);
+    }, 400);
+}
+
+document.addEventListener("DOMContentLoaded", startDotAnimation);

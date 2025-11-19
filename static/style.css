@@ -241,3 +241,11 @@ pre {
 ::-webkit-scrollbar-thumb {
     background: #00ff00;
 }
+#dot-anim {
+    display: inline-block;
+    width: 40px; /* space for dots */
+    text-align: left;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 8px #00ff00;
+}
